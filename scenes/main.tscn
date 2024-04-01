@@ -1,0 +1,184 @@
+[gd_scene load_steps=10 format=3 uid="uid://v1rdnrfahwts"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_pgxyy"]
+[ext_resource type="PackedScene" uid="uid://cu386tuariygi" path="res://scenes/player.tscn" id="1_v2u5p"]
+[ext_resource type="FontFile" uid="uid://c86qp37pqfnp3" path="res://assets/fonts/Kanit/Kanit-Regular.ttf" id="3_6igfu"]
+[ext_resource type="FontFile" uid="uid://22035xwctxf0" path="res://assets/fonts/Kanit/Kanit-Bold.ttf" id="4_0gjfo"]
+[ext_resource type="FontFile" uid="uid://dqjnqoq2y5s3i" path="res://assets/fonts/Kanit/Kanit-Medium.ttf" id="4_cvl4a"]
+[ext_resource type="PackedScene" uid="uid://bmngwkxqybkkd" path="res://scenes/gass.tscn" id="6_lb0q7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbqmk"]
+bg_color = Color(0.266667, 0.819608, 0.14902, 1)
+
+[sub_resource type="InputEventAction" id="InputEventAction_j8y63"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_umjuf"]
+events = [SubResource("InputEventAction_j8y63")]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_pgxyy")
+intents = null
+
+[node name="Player" parent="." groups=["game_controls"] instance=ExtResource("1_v2u5p")]
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(184, 500)
+
+[node name="EnemyTimer" type="Timer" parent="." groups=["timers"]]
+wait_time = 5.0
+
+[node name="DificultyTimer" type="Timer" parent="." groups=["timers"]]
+wait_time = 59.0
+
+[node name="ScoreTimer" type="Timer" parent="." groups=["timers"]]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -2.0
+offset_right = 20.0
+offset_bottom = 58.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_6igfu")
+theme_override_font_sizes/font_size = 18
+text = "SCORE: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Label" parent="HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.5
+offset_top = -41.0
+offset_right = 97.5
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_cvl4a")
+theme_override_font_sizes/font_size = 128
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="HUD" groups=["lobby_controls"]]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = 38.5
+offset_right = 167.0
+offset_bottom = 97.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_6igfu")
+theme_override_font_sizes/font_size = 18
+text = "Te quedaste sin gasolina!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Title" type="Label" parent="HUD" groups=["lobby_controls"]]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -30.0
+offset_right = 36.5
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_0gjfo")
+theme_override_font_sizes/font_size = 54
+text = "ASpeed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GasLevel" type="ProgressBar" parent="HUD" groups=["game_controls"]]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -48.0
+offset_right = 145.0
+offset_bottom = -19.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_6igfu")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/fill = SubResource("StyleBoxFlat_lbqmk")
+value = 100.0
+
+[node name="StartBtn" type="Button" parent="HUD" groups=["lobby_controls"]]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -73.0
+offset_top = -109.0
+offset_right = 73.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_6igfu")
+theme_override_font_sizes/font_size = 24
+shortcut = SubResource("Shortcut_umjuf")
+text = "Jugar"
+
+[node name="Label" type="Label" parent="HUD" groups=["game_controls"]]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = -78.0
+offset_right = 93.0
+offset_bottom = -55.0
+grow_vertical = 0
+text = "Gasolina "
+
+[node name="Speed" type="Label" parent="HUD" groups=["game_controls"]]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -113.0
+offset_top = -53.0
+offset_right = -23.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_6igfu")
+theme_override_font_sizes/font_size = 18
+text = "25 Km/h"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartTimer" type="Timer" parent="."]
+
+[node name="Gass" parent="." instance=ExtResource("6_lb0q7")]
+
+[connection signal="beaten" from="Player" to="." method="_on_player_beaten"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="DificultyTimer" to="." method="_on_dificulty_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="pressed" from="HUD/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

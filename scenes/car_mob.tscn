@@ -1,0 +1,111 @@
+[gd_scene load_steps=16 format=3 uid="uid://b8yqnfxmtryty"]
+
+[ext_resource type="Script" path="res://scenes/car_mob.gd" id="1_73kj4"]
+[ext_resource type="Texture2D" uid="uid://fff6t6812x01" path="res://assets/sprites/enemy-green-64x64-Sheet.png" id="2_kottc"]
+[ext_resource type="Texture2D" uid="uid://b32e4tdy52g8k" path="res://assets/sprites/enemy-violet-64x64-Sheet.png" id="3_lah1u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68qyw"]
+atlas = ExtResource("2_kottc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3xin"]
+atlas = ExtResource("2_kottc")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yawuq"]
+atlas = ExtResource("2_kottc")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdb2c"]
+atlas = ExtResource("2_kottc")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uex1c"]
+atlas = ExtResource("2_kottc")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1dnu"]
+atlas = ExtResource("3_lah1u")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sepw1"]
+atlas = ExtResource("3_lah1u")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iu71"]
+atlas = ExtResource("3_lah1u")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ixl"]
+atlas = ExtResource("3_lah1u")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsvn2"]
+atlas = ExtResource("3_lah1u")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vxdyw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68qyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3xin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yawuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdb2c")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_uex1c")
+}],
+"loop": true,
+"name": &"green_car",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1dnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sepw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iu71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ixl")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_bsvn2")
+}],
+"loop": true,
+"name": &"violet_car",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xo1i1"]
+radius = 21.0
+height = 56.0
+
+[node name="CarMob" type="RigidBody2D"]
+linear_velocity = Vector2(0, 250)
+script = ExtResource("1_73kj4")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vxdyw")
+animation = &"violet_car"
+frame = 4
+frame_progress = 0.622201
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_xo1i1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

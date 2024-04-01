@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmngwkxqybkkd"]
+
+[ext_resource type="Script" path="res://scenes/gass.gd" id="1_x0rjg"]
+[ext_resource type="Texture2D" uid="uid://byf0bix8w40bh" path="res://assets/sprites/gass-64x64.png" id="2_saeir"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4ii5"]
+size = Vector2(28, 28)
+
+[node name="Gass" type="Area2D"]
+script = ExtResource("1_x0rjg")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_saeir")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_r4ii5")
